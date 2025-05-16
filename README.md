@@ -12,84 +12,84 @@ English | [中文](./README.zh.md)
 ![screenshot5](./img/screen5.jpg)
 
 
-## 功能介绍
-1. 除了网页查询，支持批量查询域名，测试上传了100w域名没有问题，而且速度巨快
-2. 网页查询的结果点击后会弹出原始whois信息
-3. 支持所有的后缀，部分只能使用DNS模式，所以少部分被注册商保留的域名可能不准确，但应该极少
-4. 支持设置代理，并可以针对不同的后缀设置代理
-5. 新增Mix模式，此模式下针对不同的后缀可以自由设置直连，代理，或者DNS扫描
-6. 支持typo生成
-7. 支持自定义whois的API，可以把自己常用的注册商的API自己加进去查询域名的可用性
-8. 支持域名注册，并且自定义register的API，可以把自己常用的注册商的API自己加进去，方便注册域名
-9. 后台设置可以控制线程，失败重试等各种设置
-10. 支持API模式，你可以把程序作为一个API使用，比如接入你的WHMCS，[详见说明](https://github.com/WenLiCG/PowerWhois/blob/main/API%20documentation.md)
+## Features
+1. In addition to web queries, supports batch domain name queries. Tested with uploading 1 million domain names without issues, and the speed is extremely fast.
+2. Clicking on the web query results will pop up the original WHOIS information.
+3. Supports all suffixes. Some can only use DNS mode, so a small number of domains reserved by registrars may be inaccurate, but should be very few.
+4. Supports proxy settings and allows setting proxies for different suffixes.
+5. Added Mix mode, which allows freely setting direct connection, proxy, or DNS scanning for different suffixes.
+6. Supports typo generation.
+7. Supports custom WHOIS APIs, allowing you to add your commonly used registrar APIs to check domain availability.
+8. Supports domain registration and custom register APIs, allowing you to add your commonly used registrar APIs for convenient domain registration.
+9. Backend settings can control threads, failed retries, and various other settings.
+10. Supports API mode. You can use the program as an API, for example, integrate it with your WHMCS. [See documentation](https://github.com/WenLiCG/PowerWhois/blob/main/API%20documentation.md)
 
-## 目录结构
+## Directory Structure
 
 ```
 .
-├── deploy  (部署相关)
-│   ├── backend (后端程序)
+├── deploy  (Deployment related)
+│   ├── backend (Backend program)
 │   ├── docker-compose.yml
-│   ├── frontend    (前端程序)
-│   ├── nginx       (Nginx配置文件)
-│   └── redis       (Redis相关)
-├── README.md   (说明文档)
-└── src (源码目录)
-    ├── backend     (后端源码)
-    ├── frontend    (前端源码)
+│   ├── frontend    (Frontend program)
+│   ├── nginx       (Nginx configuration files)
+│   └── redis       (Redis related)
+├── README.md   (Documentation)
+└── src (Source code directory)
+    ├── backend     (Backend source code)
+    ├── frontend    (Frontend source code)
     └── Makefile
 ```
 
-# 部署
+# Deployment
 
-## 服务器依赖
+## Server Dependencies
 
-- docker
+- Docker
 
-## 上传文件
+## Upload Files
 
-将 deploy 文件夹中的内容原样上传到服务器中
+Upload the contents of the `deploy` folder to the server as is.
 
-## 配置
+## Configuration
 
-- 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口和 80 端口的`server_name`修改为真实的目标域名。
+- Modify the `server_name` in the Nginx configuration file `deploy/nginx/typonamer.conf` for ports 443 and 80 to your actual target domain name.
+  
+- Update the `ssl_certificate` and `ssl_certificate_key` paths in the Nginx configuration file `deploy/nginx/typonamer.conf` for port 443 to the actual paths of your SSL certificate and key.
+  
+- Change the `root` path in the Nginx configuration file `deploy/nginx/typonamer.conf` for port 443 to the actual absolute path of the `deploy/frontend` folder on your host.
+  
+- Copy the Nginx configuration file `deploy/nginx/typonamer.conf` to the Nginx configuration directory on the host, typically `/etc/nginx/conf.d/`.
+  
+- Modify the `AuthUsername` and `AuthPassword` in the `deploy/backend/config.yaml` file. `AuthUsername` is the administrator's username, and `AuthPassword` is the administrator's password.
 
-- 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口的`ssl_certificate`路径和`ssl_certificate_key`路径修改为真实的目标证书路径和密钥路径。
+## Deployment Steps
 
-- 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口的`root`路径修改为前端文件夹`deploy/frontend`在主机上的真实绝对路径。
+- Navigate to the `deploy` directory on the server.
+- Execute the command: `docker compose up -d`
+- Restart Nginx on the host: `sudo systemctl restart nginx`
+- Visit the website, for example: `https://typonamer.example.com`
 
-- 将 Nginx 配置文件`deploy/nginx/typonamer.conf`复制到主机 Nginx 的配置目录中，主机的 Nginx 的配置目录一般为`/etc/nginx/conf.d/`
+# Development
 
-- 修改`deploy/backend/config.yaml`文件中的`AuthUsername`和`AuthPassword`。其中`AuthUsername`是管理员的用户名，`AuthPassword`是管理员密码。
+## Backend
 
-## 部署
+The backend is developed using the Golang language, with the Gofiber web framework.
 
-- cd 到服务器中的 deploy 目录
-- 执行命令：`docker compose up -d`
-- 重启主机上的 Nginx：`sudo systemctl restart nginx`
-- 访问网站，例如：`https://typonamer.example.com`
-
-# 开发
-
-## 后端
-
-后端程序是用 Golang 语言开发，Web 框架使用的是 Gofiber。
-
-### 依赖
+### Dependencies
 
 - Golang 1.23+
 
-## 前端
+## Frontend
 
-前端程序使用 Vue3 开发，UI 框架使用的是 Quasar 2。
+The frontend is developed using Vue3, with the Quasar 2 UI framework.
 
-### 依赖
+### Dependencies
 
-- Nodejs v20+
+- Node.js v20+
 - yarn 1.22+
 
-### 初始化
+### Initialization
 
 ```
 cd src/frontend
@@ -97,31 +97,31 @@ yarn
 quasar dev
 ```
 
-## 编译
+## Compilation
 
-项目源码目录中已编写好`src/Makefile`文件，在 Linux 中安装好后端依赖、前端依赖以及`make`命令之后即可开始编译。编译后的输出会自动替换 deploy 目录下 backend 和 frontend 中的内容，需要手动将编译后的新文件上传到服务器中替换旧的服务器文件，然后重启容器后生效。
+A `src/Makefile` file is provided in the project source directory. After installing backend dependencies, frontend dependencies, and the `make` command on Linux, you can start compiling. The compiled output will automatically replace the contents of `deploy/backend` and `deploy/frontend`. You need to manually upload the newly compiled files to the server to replace the old server files, then restart the containers for the changes to take effect.
 
-### 单独编译后端代码
+### Compile Backend Code Only
 
 ```
 cd src/
 make backend
 ```
 
-### 单独编译前端代码
+### Compile Frontend Code Only
 
 ```
 cd src/
 make frontend
 ```
 
-### 同时编译前端和后端代码
+### Compile Both Frontend and Backend Code
 
 ```
 cd src/
 make all
 ```
 
-## 贡献
+## Contributing
 
-欢迎贡献！请随时提交 Pull Request。
+Contributions are welcome! Please feel free to submit a Pull Request.
