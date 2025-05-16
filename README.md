@@ -5,11 +5,11 @@ English | [中文](./README.zh.md)
 ## 网页版: [link](https://whois.1ka.net)
 
 ## screenshot
-![screenshot1](./imgs/screen1.jpg)
-![screenshot2](./imgs/screen2.jpg)
-![screenshot3](./imgs/screen3.jpg)
-![screenshot4](./imgs/screen4.jpg)
-![screenshot5](./imgs/screen5.jpg)
+![screenshot1](./img/screen1.jpg)
+![screenshot2](./img/screen2.jpg)
+![screenshot3](./img/screen3.jpg)
+![screenshot4](./img/screen4.jpg)
+![screenshot5](./img/screen5.jpg)
 
 
 ## 功能介绍
