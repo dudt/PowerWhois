@@ -2,7 +2,7 @@ English | [中文](./README.zh.md)
 
 # PowerWhois
 
-## 网页版: [link](https://whois.1ka.net)
+## Web Version: [link](https://whois.1ka.net)
 
 ## screenshot
 ![screenshot1](./img/screen1.jpg)
