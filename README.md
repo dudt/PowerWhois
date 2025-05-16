@@ -1,4 +1,16 @@
-## 目前只测试了debian 11/12,其他没做测试哈
+English | [中文](./README.zh.md)
+
+# PowerWhois
+
+## 网页版: [link](https://whois.1ka.net)
+
+## screenshot
+![screenshot1](./imgs/screen1.jpg)
+![screenshot2](./imgs/screen2.jpg)
+![screenshot3](./imgs/screen3.jpg)
+![screenshot4](./imgs/screen4.jpg)
+![screenshot5](./imgs/screen5.jpg)
+
 
 ## 功能介绍
 1. 除了网页查询，支持批量查询域名，测试上传了100w域名没有问题，而且速度巨快
@@ -109,3 +121,7 @@ make frontend
 cd src/
 make all
 ```
+
+## 贡献
+
+欢迎贡献！请随时提交 Pull Request。
