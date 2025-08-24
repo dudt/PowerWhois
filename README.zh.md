@@ -53,6 +53,8 @@
 
 ## 配置
 
+- 修改`deploy/backend/config.yaml`文件中的`AuthUsername`和`AuthPassword`。其中`AuthUsername`是管理员的用户名，`AuthPassword`是管理员密码。
+
 - 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口和 80 端口的`server_name`修改为真实的目标域名。
 
 - 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口的`ssl_certificate`路径和`ssl_certificate_key`路径修改为真实的目标证书路径和密钥路径。
@@ -60,10 +62,7 @@
 - 将 Nginx 配置文件`deploy/nginx/typonamer.conf`中 443 端口的`root`路径修改为前端文件夹`deploy/frontend`在主机上的真实绝对路径。
 
 - 将 Nginx 配置文件`deploy/nginx/typonamer.conf`复制到主机 Nginx 的配置目录中，主机的 Nginx 的配置目录一般为`/etc/nginx/conf.d/`
-
-- 修改`deploy/backend/config.yaml`文件中的`AuthUsername`和`AuthPassword`。其中`AuthUsername`是管理员的用户名，`AuthPassword`是管理员密码。
-
-- 更新一个宝塔的配置文件,直接把`testdomain.net`换成你域名就可以
+更新一个宝塔的配置文件,直接把`testdomain.net`换成你域名就可以
 ```
 server {
     listen 443 ssl http2;
@@ -90,7 +89,7 @@ server {
 
     location ~ ^/(api|app) {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:8082;
+        proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-Ip $proxy_protocol_addr;
@@ -115,8 +114,11 @@ server {
     }
 }
 ```
+
 ## 部署
 
+- 安装docker
+- PowerWhois/deploy/frontend 内容复制到网站根目录
 - cd 到服务器中的 deploy 目录
 - 执行命令：`docker compose up -d`
 - 重启主机上的 Nginx：`sudo systemctl restart nginx`
