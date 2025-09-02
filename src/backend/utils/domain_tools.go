@@ -116,7 +116,7 @@ func GetDomainSuffixPlusOne(domain string) (string, error) {
 		return "", errors.New("domain is invalid")
 	}
 
-	parts := strutil.SplitAndTrim(domain, domainSuffix, ".")
+	parts := strutil.SplitAndTrim(domain, fmt.Sprintf(".%s", domainSuffix), ".")
 	if len(parts) == 0 {
 		return "", errors.New("domain is invalid")
 	}
