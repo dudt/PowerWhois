@@ -1,0 +1,26 @@
+{
+    admin   off
+    auto_https off
+}
+
+:8080 {
+    encode zstd gzip
+    @static {
+        path_regexp \.(ico|css|js|gif|jpg|jpeg|png|svg|woff)$
+    }
+    header @static Cache-Control max-age=5184000
+
+    handle /api/* {
+        reverse_proxy /api/* typonamer:8080
+    }
+
+    handle /app/* {
+        reverse_proxy /app/* typonamer:8080
+    }
+
+    handle * {
+        root * /typonamer
+        try_files {path} /index.html
+        file_server
+    }
+}

@@ -360,8 +360,10 @@ func (t *Typo) TypeCustomizedReplace() []string {
 
 		newSld := strings.ReplaceAll(sld, replaceItems[0], replaceItems[1])
 
-		newDomain := fmt.Sprintf("%s.%s", newSld, suffix)
-		domains = append(domains, newDomain)
+		if newSld != sld {
+			newDomain := fmt.Sprintf("%s.%s", newSld, suffix)
+			domains = append(domains, newDomain)
+		}
 	}
 
 	return domains

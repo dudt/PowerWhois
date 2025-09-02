@@ -1,12 +1,30 @@
 services:
+  caddy:
+    container_name: caddy
+    image: caddy:2
+    ports:
+      - 8080:8080
+    links:
+      - typonamer
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./frontend:/typonamer
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - typonamer
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   typonamer:
     container_name: typonamer
     image: golang:1
     command: /typonamer/typonamer
     volumes:
       - ./backend:/typonamer
-    ports:
-      - 8080:8080
     links:
       - redis
     environment:
